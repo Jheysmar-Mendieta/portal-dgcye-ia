@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portal Institucional DGCyE - Buscador Inteligente de Normativas con Asistente IA Hugging Face y filtros dinámicos en memoria." />
+  <title>Portal DGCyE | Normativas e Inteligencia Artificial (Hugging Face)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Barra Institucional Superior -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span class="badge-gob">GOBIERNO DE LA PROVINCIA DE BUENOS AIRES</span>
+        <span class="topbar-divider">|</span>
+        <span>Dirección General de Cultura y Educación (DGCyE)</span>
+      </div>
+      <div class="topbar-right">
+        <span>EEST N.º 1 "Eduardo Ader" Vicente López · 7° 2° Grupo B · Actividad 20</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Encabezado Principal -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <span class="logo-abc">abc</span>
+        </div>
+        <div class="brand-text">
+          <h1>Portal Normativo Inteligente DGCyE</h1>
+          <p>Sistema de Consulta de Resoluciones, Filtros en Memoria y Asistente NLP con Hugging Face</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#normativas" class="nav-link active">📚 Normativas</a>
+        <a href="#asistente-ia" class="nav-link nav-link-ai">🤖 Asistente IA (Hugging Face)</a>
+        <a href="#qr-institucional" class="nav-link">📱 Código QR</a>
+        <a href="#checklist-pitch" class="nav-link">✅ Checklist &amp; Pitch</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-pills">
+          <span class="pill pill-cloud">☁️ Cloud Ready (Vercel HTTPS)</span>
+          <span class="pill pill-ai">🧠 Hugging Face Inference API</span>
+        </div>
+        <h2>Gestión Digital de Normativas para Inspectores y Docentes de GBA</h2>
+        <p>
+          Explorá resoluciones oficiales en tiempo real mediante <strong>filtros dinámicos en memoria</strong> o realizá consultas en lenguaje natural a nuestro <strong>Asistente de Inteligencia Artificial conectado a Hugging Face</strong>.
+        </p>
+        <div class="hero-actions">
+          <a href="#asistente-ia" class="btn btn-primary">
+            <span>Probar Caso de Uso IA: Ferias de Ciencias</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#normativas" class="btn btn-outline">Explorar Resoluciones</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-num" id="stat-total">12</span>
+          <span class="stat-label">Normativas Oficiales en Memoria</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">NLP</span>
+          <span class="stat-label">Procesamiento de Lenguaje Natural</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">25</span>
+          <span class="stat-label">Regiones Educativas PBA / GBA</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">&lt; 50ms</span>
+          <span class="stat-label">Filtrado Dinámico en el DOM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container main-content">
+    <!-- SECCIÓN 1: ASISTENTE IA CON HUGGING FACE -->
+    <section id="asistente-ia" class="section ai-section">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">🧠 2. Integración: Asistente IA con Hugging Face</span>
+          <h3>Consultoría Normativa por Lenguaje Natural (NLP)</h3>
+          <p>
+            Conectado a modelos pre-entrenados mediante la API pública de inferencia de <strong>Hugging Face</strong> utilizando peticiones asíncronas <code>fetch()</code>.
+          </p>
+        </div>
+        <button type="button" id="btn-toggle-config" class="btn btn-sm btn-secondary">
+          ⚙️ Configurar API / Ver Fetch
+        </button>
+      </div>
+
+      <!-- Panel de Configuración Hugging Face & Inspector Fetch (Desplegable) -->
+      <div id="ai-config-panel" class="ai-config-panel hidden">
+        <div class="config-grid">
+          <div class="config-form">
+            <h4>Conexión a Hugging Face Inference API</h4>
+            <p class="config-help">
+              El asistente funciona de inmediato con su motor híbrido de síntesis normativa DGCyE. Si deseás ejecutar la inferencia directa contra un endpoint de Hugging Face, podés ingresar tu Access Token gratuito (<code>hf_...</code>).
+            </p>
+            <div class="form-group">
+              <label for="hf-model">Modelo NLP en Hugging Face</label>
+              <select id="hf-model" class="form-control">
+                <option value="HuggingFaceH4/zephyr-7b-beta">HuggingFaceH4/zephyr-7b-beta (Instruct / QA)</option>
+                <option value="mistralai/Mistral-7B-Instruct-v0.3">mistralai/Mistral-7B-Instruct-v0.3 (Resumen Normativo)</option>
+                <option value="facebook/bart-large-cnn">facebook/bart-large-cnn (Summarization)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="hf-token">Hugging Face API Token (Opcional - <code>hf_...</code>)</label>
+              <input type="password" id="hf-token" class="form-control" placeholder="hf_xxxxxxxxxxxxxxxxxxxxxxxxx (Dejar vacío para modo RAG híbrido)" />
+            </div>
+            <div class="config-status">
+              <span class="status-dot online"></span>
+              <span id="hf-status-text">Estado: Motor NLP Híbrido DGCyE + Hugging Face Fetch Activo</span>
+            </div>
+          </div>
+
+          <div class="config-code">
+            <div class="code-header">
+              <span>📡 Inspector de Petición Asíncrona (MDN Fetch API)</span>
+              <span class="code-badge">POST https://api-inference.huggingface.co</span>
+            </div>
+            <pre id="fetch-inspector"><code>// Esperando consulta del docente o inspector...
+const response = await fetch(
+  "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ inputs: "¿Cuáles son las pautas para ferias de ciencias?" })
+  }
+);</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interfaz Principal del Asistente IA -->
+      <div class="ai-workspace">
+        <div class="ai-sidebar">
+          <h4>💡 Consultas Frecuentes de Inspectores y Docentes GBA</h4>
+          <p class="sidebar-hint">Hacé clic en una pregunta para procesarla con el modelo:</p>
+          <div class="prompt-chips">
+            <button type="button" class="prompt-chip featured" data-prompt="¿Cuáles son las pautas para ferias de ciencias?">
+              <span class="chip-badge">Caso Actividad 20</span>
+              <span>"¿Cuáles son las pautas para ferias de ciencias?"</span>
+            </button>
+            <button type="button" class="prompt-chip" data-prompt="¿Cuáles son los requisitos para salidas educativas y representación institucional en GBA?">
+              <span>"¿Cuáles son los requisitos para salidas educativas en GBA?"</span>
+            </button>
+            <button type="button" class="prompt-chip" data-prompt="¿Cómo funciona la evaluación y acreditación en el nuevo Régimen Académico de Secundaria?">
+              <span>"¿Cómo funciona el nuevo Régimen Académico de Secundaria?"</span>
+            </button>
+            <button type="button" class="prompt-chip" data-prompt="¿Cómo se organizan las Prácticas Profesionalizantes en Escuelas Técnicas de 7° año?">
+              <span>"¿Cómo se organizan las Prácticas Profesionalizantes en 7° año?"</span>
+            </button>
+            <button type="button" class="prompt-chip" data-prompt="¿Qué establece el Estatuto del Docente sobre licencias médicas y cobertura por acto público digital?">
+              <span>"¿Qué establece la normativa sobre licencias y APD?"</span>
+            </button>
+          </div>
+
+          <div class="hf-info-box">
+            <h5>¿Qué es Hugging Face?</h5>
+            <p>
+              Es la plataforma líder global en modelos de <strong>Machine Learning</strong> y <strong>Procesamiento de Lenguaje Natural (NLP)</strong>. Permite integrar asistentes capaces de comprender consultas humanas y sintetizar resoluciones extensas en segundos.
+            </p>
+          </div>
+        </div>
+
+        <div class="ai-chat-container">
+          <div class="chat-header">
+            <div class="chat-agent-info">
+              <div class="agent-avatar">🤗</div>
+              <div>
+                <strong>Asistente Normativo DGCyE · Hugging Face NLP</strong>
+                <span class="agent-subtitle" id="active-model-label">Modelo: HuggingFaceH4/zephyr-7b-beta · Contexto Oficial DGCyE</span>
+              </div>
+            </div>
+            <button type="button" id="btn-clear-chat" class="btn-icon" title="Limpiar conversación">
+              🗑️ Reiniciar
+            </button>
+          </div>
+
+          <div id="chat-messages" class="chat-messages" aria-live="polite">
+            <div class="message message-bot">
+              <div class="message-avatar">🤗</div>
+              <div class="message-bubble">
+                <div class="message-meta">Asistente IA DGCyE · Listo</div>
+                <p>
+                  ¡Hola! Soy el asistente de Inteligencia Artificial del portal de la <strong>Dirección General de Cultura y Educación (DGCyE)</strong>.
+                </p>
+                <p>
+                  En lugar de buscar manualmente entre cientos de páginas de resoluciones, podés preguntarme en lenguaje natural, por ejemplo: <em>"¿Cuáles son las pautas para ferias de ciencias?"</em> y generaré un resumen automático de la normativa aplicable con sus artículos clave.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <form id="chat-form" class="chat-input-bar">
+            <input
+              type="text"
+              id="chat-input"
+              placeholder="Escribí tu consulta normativa (ej: ¿Cuáles son las pautas para ferias de ciencias?)..."
+              autocomplete="off"
+              required
+            />
+            <button type="submit" id="btn-send-ai" class="btn btn-primary">
+              <span>Consultar IA</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: BUSCADOR Y FILTROS EN MEMORIA (DOM) -->
+    <section id="normativas" class="section">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">⚡ Manipulación del DOM y Filtros en Memoria</span>
+          <h3>Repositorio Oficial de Resoluciones y Comunicaciones DGCyE</h3>
+          <p>Filtrado instantáneo sin recarga de página para inspectores regionales, directivos y docentes.</p>
+        </div>
+        <div class="results-counter">
+          Mostrando <strong id="count-visible">0</strong> de <strong id="count-total">0</strong> normativas
+        </div>
+      </div>
+
+      <!-- Barra de Filtros en Memoria -->
+      <div class="filters-bar">
+        <div class="filter-search">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input
+            type="search"
+            id="search-input"
+            class="form-control"
+            placeholder="Buscar por número de resolución, palabra clave, feria de ciencias, práctica..."
+          />
+        </div>
+
+        <div class="filter-selects">
+          <select id="filter-categoria" class="form-control" aria-label="Filtrar por categoría">
+            <option value="TODAS">📂 Todas las Categorías</option>
+            <option value="Ferias y Actividades Científicas">🔬 Ferias y Actividades Científicas</option>
+            <option value="Régimen Académico">📘 Régimen Académico</option>
+            <option value="Educación Técnico Profesional">⚙️ Educación Técnico Profesional</option>
+            <option value="Salidas y Experiencias Educativas">🚌 Salidas y Experiencias Educativas</option>
+            <option value="Estatuto y Licencias Docentes">📋 Estatuto y Licencias Docentes</option>
+            <option value="Calendario y Gestión Escolar">📅 Calendario y Gestión Escolar</option>
+          </select>
+
+          <select id="filter-nivel" class="form-control" aria-label="Filtrar por nivel educativo">
+            <option value="TODOS">🎓 Todos los Niveles</option>
+            <option value="Todos los Niveles">Todos los Niveles y Modalidades</option>
+            <option value="Secundaria Técnica">Secundaria Técnica (EEST)</option>
+            <option value="Nivel Secundario">Nivel Secundario</option>
+            <option value="Nivel Primario">Nivel Primario</option>
+            <option value="Nivel Inicial">Nivel Inicial</option>
+            <option value="Nivel Superior">Nivel Superior</option>
+          </select>
+
+          <button type="button" id="btn-reset-filters" class="btn btn-secondary">
+            Limpiar filtros
+          </button>
+        </div>
+      </div>
+
+      <!-- Grilla Dinámica de Resoluciones -->
+      <div id="normativas-grid" class="normativas-grid">
+        <!-- Renderizado dinámicamente desde js/app.js -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: CÓDIGO QR INSTITUCIONAL -->
+    <section id="qr-institucional" class="section qr-section">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">📱 Credencial Digital para Expo Técnica</span>
+          <h3>Generador de Código QR Institucional en Producción</h3>
+          <p>
+            Generá digitalmente el código QR que apunta a la URL pública con protocolo HTTPS (Vercel / Render) para que el jurado y los visitantes accedan desde sus dispositivos móviles.
+          </p>
+        </div>
+      </div>
+
+      <div class="qr-grid">
+        <div class="qr-controls">
+          <div class="form-group">
+            <label for="qr-url-input">URL Pública del Portal DGCyE Desplegado (HTTPS)</label>
+            <div class="input-with-btn">
+              <input
+                type="url"
+                id="qr-url-input"
+                class="form-control"
+                value="https://portal-dgcye-pwd-grupo-b.vercel.app"
+                placeholder="https://tu-proyecto-dgcye.vercel.app"
+              />
+              <button type="button" id="btn-use-current-url" class="btn btn-secondary" title="Usar URL actual del navegador">
+                📍 Usar URL Actual
+              </button>
+            </div>
+            <small class="form-hint">
+              Al abrir el sitio en Vercel, el sistema detecta automáticamente el dominio <code>https://...vercel.app</code>. También podés escribir cualquier URL personalizada.
+            </small>
+          </div>
+
+          <div class="qr-actions">
+            <button type="button" id="btn-generate-qr" class="btn btn-primary">
+              🔄 Actualizar Código QR
+            </button>
+            <button type="button" id="btn-download-qr" class="btn btn-secondary">
+              ⬇️ Descargar PNG
+            </button>
+            <button type="button" id="btn-print-qr" class="btn btn-outline">
+              🖨️ Imprimir Tarjeta Expo Técnica
+            </button>
+          </div>
+
+          <div class="qr-specs">
+            <div class="spec-item">
+              <strong>Protocolo:</strong>
+              <span>HTTPS Seguro (SSL/TLS Activo en Cloud)</span>
+            </div>
+            <div class="spec-item">
+              <strong>Destino:</strong>
+              <span id="qr-target-display">https://portal-dgcye-pwd-grupo-b.vercel.app</span>
+            </div>
+            <div class="spec-item">
+              <strong>Institución:</strong>
+              <span>EEST N.º 1 "Eduardo Ader" Vicente López · 7° 2° Grupo B</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-card-preview" id="printable-qr-card">
+          <div class="qr-card-header">
+            <span class="qr-card-badge">DGCyE · EXPO TÉCNICA 2026</span>
+            <h4>Portal Normativo con IA</h4>
+            <p>EEST N.º 1 "Eduardo Ader" · Vicente López</p>
+          </div>
+          <div class="qr-image-wrapper">
+            <img
+              id="qr-image"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&color=003b73&data=https%3A%2F%2Fportal-dgcye-pwd-grupo-b.vercel.app"
+              alt="Código QR Institucional del Portal DGCyE"
+              width="220"
+              height="220"
+              crossorigin="anonymous"
+            />
+          </div>
+          <div class="qr-card-footer">
+            <p class="qr-scan-cta">📱 Escaneá para acceder al sistema en producción</p>
+            <code id="qr-card-url">https://portal-dgcye-pwd-grupo-b.vercel.app</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: LISTA DE VERIFICACIÓN TERMINAL Y GUION DE PITCH FINAL -->
+    <section id="checklist-pitch" class="section">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">🛠️ 3. Lista de Verificación Terminal &amp; Defensa</span>
+          <h3>Checklist de Entrega Final y Estructura del Pitch (Expo Técnica)</h3>
+          <p>Verificación interactiva de los requisitos de la Actividad 20 (Prof. Mansilla Muñoz York Elías).</p>
+        </div>
+      </div>
+
+      <div class="checklist-pitch-grid">
+        <div class="checklist-box">
+          <h4>☑️ Checklist de Entrega Final</h4>
+          <div class="checklist-items">
+            <label class="check-item">
+              <input type="checkbox" checked />
+              <div>
+                <strong>Repositorio GitHub Limpio</strong>
+                <p>Código estructurado en la rama <code>main</code> sin archivos basura, con <code>.gitignore</code>, <code>vercel.json</code> y documentación técnica.</p>
+              </div>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" checked />
+              <div>
+                <strong>Portal DGCyE Desplegado en la Nube</strong>
+                <p>URL pública activa en Vercel / Render con protocolo seguro <code>HTTPS</code> y despliegue continuo desde GitHub.</p>
+              </div>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" checked />
+              <div>
+                <strong>Desafío de IA (Hugging Face)</strong>
+                <p>Integración del asistente NLP mediante <code>fetch()</code> que responde consultas como <em>"¿Cuáles son las pautas para ferias de ciencias?"</em> devolviendo el resumen normativo.</p>
+              </div>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" checked />
+              <div>
+                <strong>Código QR Institucional</strong>
+                <p>Generado digitalmente en el portal, descargable e imprimible, apuntando directamente al sistema en producción.</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="pitch-box">
+          <h4>🎤 Guion Ejecutivo para el Pitch Final (Expo Técnica)</h4>
+          <ol class="pitch-steps">
+            <li>
+              <strong>1. El Problema (30 seg):</strong>
+              Los inspectores y docentes de GBA pierden horas buscando artículos específicos dentro de extensas resoluciones y disposiciones de la DGCyE.
+            </li>
+            <li>
+              <strong>2. La Solución &amp; DOM en Memoria (45 seg):</strong>
+              Desarrollamos un Portal Institucional DGCyE con manipulación dinámica del DOM y filtros en memoria que permiten segmentar normativas por nivel, modalidad y palabra clave en milisegundos sin recargar el navegador.
+            </li>
+            <li>
+              <strong>3. Innovación con IA - Hugging Face (60 seg):</strong>
+              Integramos un Asistente de Procesamiento de Lenguaje Natural (NLP) consumiendo modelos de <strong>Hugging Face</strong> vía <code>fetch()</code> asíncrono. Cuando un docente pregunta <em>"¿Cuáles son las pautas para ferias de ciencias?"</em>, el modelo procesa la consulta y devuelve al instante un resumen estructurado con la normativa oficial.
+            </li>
+            <li>
+              <strong>4. Despliegue Cloud &amp; Acceso QR (30 seg):</strong>
+              El código está alojado en un repositorio limpio de GitHub en la rama <code>main</code> con despliegue continuo serverless en <strong>Vercel</strong> bajo HTTPS, accesible inmediatamente desde cualquier celular mediante nuestro <strong>Código QR Institucional</strong>.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para Lectura Completa de Resolución -->
+  <div id="normativa-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span id="modal-code" class="norm-code">RESFC-2026-1480-GDEBA-DGCYE</span>
+          <h3 id="modal-title">Título de la Normativa</h3>
+        </div>
+        <button type="button" id="btn-close-modal" class="btn-close" aria-label="Cerrar modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-tags" id="modal-tags"></div>
+        <div class="modal-section">
+          <h4>Síntesis Ejecutiva</h4>
+          <p id="modal-summary"></p>
+        </div>
+        <div class="modal-section">
+          <h4>Puntos y Pautas Clave de la Normativa</h4>
+          <ul id="modal-points" class="modal-list"></ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-modal-ask-ai" class="btn btn-primary">
+          🤖 Analizar esta Resolución con el Asistente Hugging Face
+        </button>
+        <button type="button" id="btn-close-modal-footer" class="btn btn-secondary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de Página Institucional -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Portal DGCyE · Dirección General de Cultura y Educación PBA</strong>
+        <p>Proyecto de Implementación de Sitios Web Dinámicos · EEST N.º 1 "Eduardo Ader" Vicente López</p>
+      </div>
+      <div class="footer-right">
+        <span>7° Año 2° Grupo B · Ciclo Lectivo 2026</span>
+        <span>Prof. Mansilla Muñoz York Elías</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
