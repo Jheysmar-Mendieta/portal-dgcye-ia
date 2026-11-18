@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Normativas - DGCyE Provincia de Buenos Aires (Actividad 19)</title>
+  <style>
+    /* Estilos generales del Portal (Diseño moderno oscuro tipo dashboard institucional) */
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 8px;
+      border-bottom: 4px solid #eab308;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #facc15;
+    }
+    .header-meta {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      text-align: right;
+    }
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border-left: 4px solid #38bdf8;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #fff;
+      box-sizing: border-box;
+      font-size: 0.95rem;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+    .badge {
+      background: #334155;
+      color: #38bdf8;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .metric-pill {
+      display: inline-block;
+      background: #064e3b;
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+    .btn-descarga {
+      background: #eab308;
+      color: #0f172a;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .btn-descarga:hover {
+      background: #ca8a04;
+    }
+    .nav-banner {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+    .nav-banner a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>🏛️ DGCyE - Buscador Oficial de Normativas y Planes de Estudio (GBA)</h1>
+      <p style="margin: 6px 0 0 0; color: #cbd5e1;">Sistema de Consulta Rápida para Instituciones Educativas de la Provincia de Buenos Aires</p>
+    </div>
+    <div class="header-meta">
+      <div><strong>EEST N.º 1 "Eduardo Ader" Vicente López</strong></div>
+      <div>7° 2° Grupo B · Jheysmar Mendieta · Actividad 19</div>
+    </div>
+  </header>
+
+  <div class="nav-banner">
+    <span>⚡ <strong>Complejidad Algorítmica:</strong> Filtrado en memoria RAM del cliente <code>O(n)</code> con <code>.filter()</code> e <code>.includes()</code> <span id="tiempo-ejecucion" class="metric-pill">Tiempo: 0.12 ms</span></span>
+    <a href="index.html">Ir a Actividad 20 (Versión Cloud + IA Hugging Face) →</a>
+  </div>
+
+  <div class="grid-layout">
+    <!-- Columna Principal: Buscador y Resultados -->
+    <div>
+      <div class="card">
+        <h3>🔍 Filtrado Dinámico de Resoluciones</h3>
+        <!-- EVENTO oninput: Cada vez que el usuario escribe una letra, se dispara la función JS -->
+        <input type="text" id="buscador" placeholder="Buscar por número, palabra clave o descripción..." oninput="filtrarNormativas()">
+
+        <label for="filtro-tipo">Tipo de Norma:</label>
+        <!-- EVENTO onchange: Al cambiar la opción del selector, se relanza el filtro -->
+        <select id="filtro-tipo" onchange="filtrarNormativas()">
+          <option value="todos">Todas las normativas</option>
+          <option value="Resolución">Resolución</option>
+          <option value="Disposición">Disposición</option>
+          <option value="Circular">Circular</option>
+        </select>
+      </div>
+
+      <!-- Contenedor dinámico donde JavaScript inyectará las tarjetas de resultados -->
+      <div id="contenedor-resultados"></div>
+    </div>
+
+    <!-- Columna Secundaria: Filtro de Año y Descargas -->
+    <div>
+      <div class="card">
+        <h3>📅 Calendario Histórico</h3>
+        <p>Seleccione periodo para auditoría:</p>
+        <select id="filtro-anio" onchange="filtrarNormativas()">
+          <option value="todos">Todos los períodos (2024 - 2026)</option>
+          <option value="2026">2026 (Año Actual)</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+        </select>
+        <hr style="border-color: #334155; margin: 15px 0;">
+        <h4>📂 Anexos y Grillas</h4>
+        <p style="font-size: 0.90rem; color: #94a3b8;">Descargue los planes de estudio en formato tabular oficiales aprobados por la DGCyE.</p>
+        <a href="#" class="btn-descarga" onclick="alert('Descargando Anexo Excel Planes de Estudio GBA...')">📥 Descargar Planes de Estudio (.xlsx)</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // 1. BASE DE DATOS LOCAL (Mock Data en Memoria)
+    // ==========================================
+    const baseDatosNormativas = [
+      {
+        id: 1,
+        nro: "Resolución N° 651/26",
+        tipo: "Resolución",
+        anio: "2026",
+        desc: "Aprueba pliegos y autoriza llamado a Licitación Pública para equipamiento técnico en EEST de GBA."
+      },
+      {
+        id: 2,
+        nro: "Disposición N° 420/25",
+        tipo: "Disposición",
+        anio: "2025",
+        desc: "Lineamientos curriculares para el ciclo superior de Escuelas Técnicas en Región Metropolitana."
+      },
+      {
+        id: 3,
+        nro: "Circular N° 128/26",
+        tipo: "Circular",
+        anio: "2026",
+        desc: "Cronograma oficial para Ferias de Ciencia, Arte y Tecnología (ACTE) en los 135 distritos de la Provincia."
+      },
+      {
+        id: 4,
+        nro: "Resolución N° 969/25",
+        tipo: "Resolución",
+        anio: "2025",
+        desc: "Marco regulatorio general para prácticas profesionalizantes en tecnicaturas superiores y secundarias."
+      },
+      {
+        id: 5,
+        nro: "Resolución N° 1650/24",
+        tipo: "Resolución",
+        anio: "2024",
+        desc: "Actualización del Régimen Académico y períodos de intensificación para la Educación Secundaria de PBA."
+      }
+    ];
+
+    // ==========================================
+    // 2. FUNCIÓN PRINCIPAL DE FILTRADO (Lógica O(n))
+    // ==========================================
+    function filtrarNormativas() {
+      const t0 = performance.now();
+
+      // A. Capturamos los valores actuales que escribió o seleccionó el usuario
+      const texto = document.getElementById('buscador').value.toLowerCase();
+      const tipoSeleccionado = document.getElementById('filtro-tipo').value;
+      const anioSeleccionado = document.getElementById('filtro-anio').value;
+
+      // B. Aplicamos el método .filter() sobre el arreglo en memoria RAM
+      const resultadosFiltrados = baseDatosNormativas.filter(item => {
+        // Evaluamos coincidencia de texto (número de norma o descripción)
+        const coincideTexto = item.nro.toLowerCase().includes(texto) ||
+                              item.desc.toLowerCase().includes(texto);
+
+        // Evaluamos coincidencia de tipo (si es 'todos' o coincide exactamente)
+        const coincideTipo = (tipoSeleccionado === "todos") || (item.tipo === tipoSeleccionado);
+
+        // Evaluamos coincidencia de año
+        const coincideAnio = (anioSeleccionado === "todos") || (item.anio === anioSeleccionado);
+
+        // Retornamos true solo si cumple con las tres condiciones simultáneamente
+        return coincideTexto && coincideTipo && coincideAnio;
+      });
+
+      const t1 = performance.now();
+      const badgeTiempo = document.getElementById('tiempo-ejecucion');
+      if (badgeTiempo) {
+        badgeTiempo.textContent = `Tiempo: ${(t1 - t0).toFixed(2)} ms (${resultadosFiltrados.length} resultados)`;
+      }
+
+      // C. Enviamos la lista resultante a la función que dibuja el HTML
+      renderizarResultados(resultadosFiltrados);
+    }
+
+    // ==========================================
+    // 3. FUNCIÓN DE RENDERIZADO EN EL DOM
+    // ==========================================
+    function renderizarResultados(lista) {
+      const contenedor = document.getElementById('contenedor-resultados');
+
+      // Si la búsqueda no arroja resultados, mostramos alerta visual
+      if (lista.length === 0) {
+        contenedor.innerHTML = `<div class="card"><p>No se encontraron normativas coincidentes en los registros de la DGCyE.</p></div>`;
+        return;
+      }
+
+      // Transformamos cada objeto del arreglo en código HTML usando .map() y .join('')
+      contenedor.innerHTML = lista.map(item => `
+        <div class="card">
+          <span class="badge">${item.tipo} - Año ${item.anio}</span>
+          <h3 style="margin-top: 10px; color: #38bdf8;">${item.nro}</h3>
+          <p>${item.desc}</p>
+          <a href="#" class="btn-descarga" onclick="alert('Abriendo documento oficial asociado a ${item.nro}')">📄 Ver Anexo PDF</a>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // 4. INICIALIZACIÓN AUTOMÁTICA AL CARGAR LA PÁGINA
+    // ==========================================
+    renderizarResultados(baseDatosNormativas);
+  </script>
+</body>
+</html>
