@@ -3,8 +3,11 @@
 **Materia:** Proyecto de Implementación de Sitios Web Dinámicos  
 **Institución:** EEST N.º 1 "Eduardo Ader" — Vicente López  
 **Curso:** 7° Año 2° Grupo B  
+**Estudiante:** Jheysmar Mendieta  
 **Docente:** Prof. Mansilla Muñoz York Elías  
-**Actividad 20:** Despliegue en la Nube, Inteligencia Artificial y Pitch Final (Caso DGCyE)
+**Actividad 20:** Despliegue en la Nube, Inteligencia Artificial y Pitch Final (Caso DGCyE)  
+**Repositorio GitHub (`main`):** https://github.com/Jheysmar-Mendieta/portal-dgcye-ia  
+**Portal DGCyE Desplegado (HTTPS):** https://jheysmar-mendieta.github.io/portal-dgcye-ia/
 
 ---
 

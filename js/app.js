@@ -414,7 +414,7 @@ const response = await fetch("${endpoint}", {
   // =========================================================================
 
   function updateQrCode(url) {
-    const cleanUrl = url.trim() || "https://portal-dgcye-pwd-grupo-b.vercel.app";
+    const cleanUrl = url.trim() || "https://jheysmar-mendieta.github.io/portal-dgcye-ia/";
     const encoded = encodeURIComponent(cleanUrl);
     const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&color=003b73&data=${encoded}`;
 
